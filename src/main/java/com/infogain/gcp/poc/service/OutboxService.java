@@ -38,6 +38,7 @@ public class OutboxService {
     @Transactional
     public OutboxModel saveOutboxModel(OutboxModel outboxModel){
         OutboxEntity outboxEntity = outboxModel.buildEntity();
+        outboxRepository.save(outboxEntity);
         return outboxEntity.buildModel();
     }
 
@@ -45,6 +46,7 @@ public class OutboxService {
     @Transactional
     public OutboxStatusModel saveOutboxStatusModel(OutboxStatusModel outboxStatusModel){
         OutboxStatusEntity outboxStatusEntity = outboxStatusModel.buildEntity();
+        outboxStatusRepository.save(outboxStatusEntity);
         return outboxStatusEntity.buildModel();
     }
 
