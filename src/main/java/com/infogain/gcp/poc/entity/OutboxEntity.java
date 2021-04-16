@@ -33,7 +33,7 @@ public class OutboxEntity {
     private Timestamp data;
 
     @SneakyThrows
-    public OutboxModel buildModel(){
+    public OutboxModel buildModel() {
         OutboxModel outboxModel = new OutboxModel();
         BeanUtils.copyProperties(outboxModel, this);
         return outboxModel;
