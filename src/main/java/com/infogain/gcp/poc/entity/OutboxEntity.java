@@ -21,7 +21,7 @@ public class OutboxEntity {
 
     @PrimaryKey(keyOrder = 2)
     @Column(name = "version")
-    private String version;
+    private Integer version;
 
     @Column(name = "parent_locator")
     private String parent_locator;
@@ -30,7 +30,7 @@ public class OutboxEntity {
     private Timestamp created;
 
     @Column(name = "data")
-    private Timestamp data;
+    private String data;
 
     @SneakyThrows
     public OutboxModel buildModel() {

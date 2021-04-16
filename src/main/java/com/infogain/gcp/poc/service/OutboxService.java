@@ -2,10 +2,8 @@ package com.infogain.gcp.poc.service;
 
 import com.infogain.gcp.poc.entity.OutboxEntity;
 import com.infogain.gcp.poc.entity.OutboxStatusEntity;
-import com.infogain.gcp.poc.entity.PNREntity;
 import com.infogain.gcp.poc.model.OutboxModel;
 import com.infogain.gcp.poc.model.OutboxStatusModel;
-import com.infogain.gcp.poc.model.PNRModel;
 import com.infogain.gcp.poc.repository.OutboxRepository;
 import com.infogain.gcp.poc.repository.OutboxStatusRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +36,9 @@ public class OutboxService {
     @Transactional
     public OutboxModel saveOutboxModel(OutboxModel outboxModel){
         OutboxEntity outboxEntity = outboxModel.buildEntity();
-        outboxRepository.save(outboxEntity);
-        return outboxEntity.buildModel();
+        outboxRepository.findAll();
+        outboxEntity = outboxRepository.save(outboxEntity);
+        return new OutboxModel();
     }
 
     @SuppressWarnings("all")

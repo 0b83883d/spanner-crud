@@ -11,16 +11,16 @@ import org.apache.commons.beanutils.BeanUtils;
 @ToString(of = {"locator","version"})
 public class OutboxModel {
 
-    private String locator;
-    private String version;
+        private String locator;
+    private Integer version;
     private String parent_locator;
-    private Timestamp created;
-    private Timestamp data;
 
     @SneakyThrows
     public OutboxEntity buildEntity(){
         OutboxEntity outboxEntity = new OutboxEntity();
         BeanUtils.copyProperties(outboxEntity, this);
+        outboxEntity.setCreated(Timestamp.now());
+        outboxEntity.setData("temp data");
         return outboxEntity;
     }
 

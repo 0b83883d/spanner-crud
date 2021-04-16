@@ -1,5 +1,5 @@
 # server properties
-server.port: 8080
+server.port: 9090
 
 # actuator properties
 management:
@@ -28,10 +28,10 @@ spring:
   profiles.active: test
   cloud:
     gcp:
-      project-id: gcp-practice-project-307011
+      project-id: pnr-order-poc
       spanner:
         instance-id: instance-1
-        database: database-1
+        database: pnr-1
 #        credentials.location: file:C:\softwares\gcp\keys.json
 #  jpa:
 #    show-sql: true
