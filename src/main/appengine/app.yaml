@@ -1,4 +1,4 @@
-runtime: java8
+runtime: java
 instance_class: F4
 env_variables:
-  JAVA_OPTS="-Xms512m -Xmx1024m"
+  JAVA_OPTS: "-Xms512m -Xmx1024m"
