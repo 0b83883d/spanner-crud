@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController 
-@RequestMapping(value = "/api")
 public class OutboxController {
 
     @Autowired
     private OutboxService outboxService;
+
+    @GetMapping(value="/", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String index() {
+        return "This is Home page";
+    }
 
     @PostMapping(value = "/outbox", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
