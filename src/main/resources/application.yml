@@ -1,5 +1,5 @@
 # server properties
-server.port: 80
+server.port: 8080
 
 # actuator properties
 management:
