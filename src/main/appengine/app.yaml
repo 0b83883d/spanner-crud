@@ -1,2 +1,2 @@
 runtime: java
-entrypoint: java -Xmx1024m -jar spanner-crud.jar
+instance_class: flex
