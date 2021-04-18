@@ -11,7 +11,7 @@ import org.springframework.cloud.gcp.data.spanner.core.mapping.Table;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = {"locator", "version"})
+@ToString
 @Table(name = "outbox")
 public class OutboxEntity {
 

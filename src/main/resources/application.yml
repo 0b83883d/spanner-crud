@@ -1,5 +1,5 @@
 # server properties
-server.port: 9090
+server.port: 7070
 
 # actuator properties
 management:
@@ -31,7 +31,7 @@ spring:
       project-id: pnr-order-poc
       spanner:
         instance-id: instance-1
-        database: pnr-1
+        database: database-1
 #        credentials.location: file:C:\softwares\gcp\keys.json
 #  jpa:
 #    show-sql: true

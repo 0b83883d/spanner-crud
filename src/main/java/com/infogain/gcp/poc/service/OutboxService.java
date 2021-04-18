@@ -36,30 +36,9 @@ public class OutboxService {
     @Transactional
     public OutboxModel saveOutboxModel(OutboxModel outboxModel){
         OutboxEntity outboxEntity = outboxModel.buildEntity();
-        outboxRepository.findAll();
         outboxEntity = outboxRepository.save(outboxEntity);
-        return new OutboxModel();
+        log.debug("Saved OutboxEntity={}",outboxEntity.toString());
+        return outboxEntity.buildModel();
     }
 
-    @SuppressWarnings("all")
-    @Transactional
-    public OutboxStatusModel saveOutboxStatusModel(OutboxStatusModel outboxStatusModel){
-        OutboxStatusEntity outboxStatusEntity = outboxStatusModel.buildEntity();
-        outboxStatusRepository.save(outboxStatusEntity);
-        return outboxStatusEntity.buildModel();
-    }
-
-    public List<OutboxModel> findAllOutboxModelList(){
-        log.info("find all PNREntity objects");
-        Iterable<OutboxEntity> outboxEntities = outboxRepository.findAll();
-        List<OutboxEntity> outboxStatusEntityList = IterableUtils.toList(outboxEntities);
-        return outboxStatusEntityList.stream().map(OutboxEntity::buildModel).collect(Collectors.toList());
-    }
-
-    public List<OutboxStatusModel> findAllOutboxStatusModelList(){
-        log.info("find all PNREntity objects");
-        Iterable<OutboxStatusEntity> outboxStatusEntities = outboxStatusRepository.findAll();
-        List<OutboxStatusEntity> outboxStatusEntityList = IterableUtils.toList(outboxStatusEntities);
-        return outboxStatusEntityList.stream().map(OutboxStatusEntity::buildModel).collect(Collectors.toList());
-    }
 }

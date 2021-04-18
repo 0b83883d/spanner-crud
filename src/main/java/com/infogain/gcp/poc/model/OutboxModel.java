@@ -8,19 +8,19 @@ import org.apache.commons.beanutils.BeanUtils;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = {"locator","version"})
+@ToString
 public class OutboxModel {
 
         private String locator;
     private Integer version;
     private String parent_locator;
+    private String data;
 
     @SneakyThrows
     public OutboxEntity buildEntity(){
         OutboxEntity outboxEntity = new OutboxEntity();
         BeanUtils.copyProperties(outboxEntity, this);
         outboxEntity.setCreated(Timestamp.now());
-        outboxEntity.setData("temp data");
         return outboxEntity;
     }
 
