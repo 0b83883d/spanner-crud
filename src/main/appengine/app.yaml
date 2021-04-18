@@ -1,2 +1,2 @@
-runtime: java11
-instance_class: F4
+runtime: java8
+instance_class: flex
