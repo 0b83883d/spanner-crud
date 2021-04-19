@@ -20,12 +20,6 @@ import java.util.stream.Collectors;
 @Service
 public class OutboxService {
 
-    @Value("${app.publish.end.point}")
-    private String publishEndPoint;
-
-    @Value("${app.publish.base.url}")
-    private String baseUrl;
-
     @Autowired
     private OutboxStatusRepository outboxStatusRepository;
 
