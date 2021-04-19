@@ -1,5 +1,3 @@
-# server properties
-server.port: 8080
 
 # actuator properties
 management:
@@ -35,18 +33,3 @@ spring:
 #        credentials.location: file:C:\softwares\gcp\keys.json
 #  jpa:
 #    show-sql: true
-
----
-spring.profiles: dev
-
-app:
-  publish.base.url: http://localhost:8081
-  publish.end.point: /api/v1/publish
----
-spring.profiles: test
-
-app:
-  publish.base.url: http://34.69.229.231:8080
-  publish.end.point: /api/v1/publish
----
-spring.profiles: prod
