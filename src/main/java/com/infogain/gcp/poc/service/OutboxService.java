@@ -31,7 +31,7 @@ public class OutboxService {
     public OutboxModel saveOutboxModel(OutboxModel outboxModel){
         OutboxEntity outboxEntity = outboxModel.buildEntity();
         outboxEntity = outboxRepository.save(outboxEntity);
-        log.debug("Saved OutboxEntity={}",outboxEntity.toString());
+        log.info("Saved OutboxEntity={}",outboxEntity.toString());
         return outboxEntity.buildModel();
     }
 

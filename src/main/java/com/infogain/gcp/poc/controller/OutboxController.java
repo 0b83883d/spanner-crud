@@ -23,7 +23,7 @@ public class OutboxController {
     @PostMapping(value = "/createOutboxRecord", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public OutboxModel saveOutboxModel(@RequestBody OutboxModel outboxModel){
-        log.debug("Received Outbox Model {}",outboxModel.toString());
+        log.info("Received Outbox Model {}",outboxModel.toString());
         return outboxService.saveOutboxModel(outboxModel);
     }
 
