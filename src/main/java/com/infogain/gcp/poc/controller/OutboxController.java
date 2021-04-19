@@ -8,7 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RequestMapping(value = "/")
+@RestController
+@RequestMapping
 public class OutboxController {
 
     @Autowired
