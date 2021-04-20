@@ -17,10 +17,10 @@ public class OutboxController {
 
     @GetMapping(value="/", produces = MediaType.TEXT_PLAIN_VALUE)
     public String index() {
-        return "This is Home page";
+        return "Ready to serve requests";
     }
 
-    @PostMapping(value = "/createOutboxRecord", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(value = "/api/outbox/create", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public OutboxModel saveOutboxModel(@RequestBody OutboxModel outboxModel){
         log.info("Received Outbox Model {}",outboxModel.toString());

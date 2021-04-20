@@ -1,5 +1,6 @@
 package com.infogain.gcp.poc.service;
 
+import com.google.cloud.Timestamp;
 import com.infogain.gcp.poc.entity.OutboxEntity;
 import com.infogain.gcp.poc.entity.OutboxStatusEntity;
 import com.infogain.gcp.poc.model.OutboxModel;
@@ -30,6 +31,7 @@ public class OutboxService {
     @Transactional
     public OutboxModel saveOutboxModel(OutboxModel outboxModel){
         OutboxEntity outboxEntity = outboxModel.buildEntity();
+        outboxEntity.setCreated(Timestamp.now());
         outboxEntity = outboxRepository.save(outboxEntity);
         log.info("Saved OutboxEntity={}",outboxEntity.toString());
         return outboxEntity.buildModel();
