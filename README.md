@@ -1,41 +1,50 @@
-# Spanner CRUD APIs
+# Spanner Crud APIs
 
-# Create maven project using below command
-```
-mvn archetype:generate -DgroupId=com.infogain.gcp.poc -DartifactId=spanner-crud -Dversion=1.0.0 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
-```
+This application exposes one RESTful API ```/api/outbox/create```
+which simply creates a new record in the Outbox table. 
 
-# Spanner DDL scripts
-* pnr table
+Sample Payload as under:
 ```
-CREATE TABLE pnr (
-    pnr_id STRING(MAX),
-    mobileNumber STRING(MAX),
-    remark STRING(MAX),
-    lastUpdateTimestamp TIMESTAMP NOT NULL OPTIONS (allow_commit_timestamp=true)
-) PRIMARY KEY (pnr_id);
-```
+{
+	"locator":"AAA001",
+	"version":1,
+	"parent_locator":"",
+   	"created": "2021-04-20T13:44:21.123Z",
+	"data":"pnr:{}"	
+}
 
-* pnr_out_box table
-```
-create table pnr_out_box(
-    id string(max),
-    pnr_id string(max),
-    is_processed bool,
-    retry_count int64,
-    event_type string(max),
-    processed_by string(max)
-) primary key(id);
 ```
 
-* poller commit timestamp - not needed
-```
-CREATE TABLE POLLER_COMMIT_TIMESTAMPS (
-    last_commit_timestamp TIMESTAMP
-) PRIMARY KEY (last_commit_timestamp);
-```
+# Spanner Crud DDL Scripts
 
-# References
-* [https://codelabs.developers.google.com/codelabs/cloud-springboot-kubernetes#0](https://codelabs.developers.google.com/codelabs/cloud-springboot-kubernetes#0)
-* [https://medium.com/javarevisited/kubernetes-step-by-step-with-spring-boot-docker-gke-35e9481f6d5f](https://medium.com/javarevisited/kubernetes-step-by-step-with-spring-boot-docker-gke-35e9481f6d5f)
-* [https://cloud.google.com/pubsub/docs/filtering](https://cloud.google.com/pubsub/docs/filtering)
+* Outbox table
+```
+CREATE TABLE OUTBOX (
+	locator STRING(6) NOT NULL,
+	version INT64 NOT NULL,
+	parent_locator STRING(6),
+	created TIMESTAMP NOT NULL,
+	data STRING(MAX) NOT NULL,
+) PRIMARY KEY (locator, version)
+
+```
+* Outbox_status table
+```
+CREATE TABLE OUTBOX_STATUS (
+	locator STRING(6) NOT NULL,
+	version INT64 NOT NULL,
+	destination STRING(20) NOT NULL,
+	status INT64 NOT NULL,
+	created TIMESTAMP NOT NULL,
+	updated TIMESTAMP NOT NULL,
+	instance STRING(64) NOT NULL,
+	FOREIGN KEY (locator, version) REFERENCES OUTBOX(locator, version),
+) PRIMARY KEY (locator, version, destination),
+INTERLEAVE IN PARENT OUTBOX ON DELETE CASCADE;
+
+CREATE INDEX processing_locators 
+ON OUTBOX_STATUS (
+	status,
+	locator
+);
+```
